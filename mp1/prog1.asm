@@ -104,36 +104,54 @@ PRINT_HIST
 ; for your implementation, list registers used in this part of the code,
 ; and provide sufficient comments
 
-; R0: char
+
+; Intro Paragraph:
+; partners: swhuang3, ycc6, dhhuang3
+; I pack my code that print 4 digit number from Lab1 to a subroutine, with number parameter passed by R3.
+; Then loop 27 times to iterate and print the 27 bins.
+; partners: swhuang3, ycc6, dhhuang3
+
+; Main code
+; R0: char, OUT register
 ; R1: counter
 ; R2: tmp
-; R3: parameter
-	LD R1, ZERO
+; R3: PRINT_NUMBER parameter
+
+; Function PRINT_NUMBER
+; Registers:
+;   R3: input parameter
+;   R4: digitCounter
+;   R5: digit
+;   R6: bitCounter
+;   R0: tmp
+
+
+	LD R1, ZERO			; Clear counter to zero
 
 PRINT_HIST_LOOP
-	ADD R2, R1, #-16
+	ADD R2, R1, #-16	; Check if counter < 27
 	ADD R2, R2, #-11
-	BRzp DONE
+	BRzp DONE			; End the code if counter >= 27
 
-	LD R0, ASCII_AT
-	ADD R0, R0, R1
+	LD R0, ASCII_AT		; Load ASCII "@" offset to R0
+	ADD R0, R0, R1		; Add counter(R2) to R0 to get histogram index char
 	OUT
 
-	LD R0, ASCII_SPACE
+	LD R0, ASCII_SPACE	; Output SPACE
 	OUT
 
-	LD R0, HIST_ADDR
-	ADD R0, R0, R1
-	LDR R3, R0, #0
 
-	JSR  PRINT_NUMBER
+	LD R0, HIST_ADDR	; Load base address
+	ADD R0, R0, R1		; Calculate histogram bin memory offset
+	LDR R3, R0, #0		; Load histogram bin data to parameter R3
+	JSR  PRINT_NUMBER	; Call PRINT_NUMBER subroutine with parameter R3
  
 
-	LD R0, ASCII_NL
+	LD R0, ASCII_NL		; Output newline
 	OUT
 
 
-	ADD R1, R1, #1
+	ADD R1, R1, #1		; Increase counter by one
 	BRnzp PRINT_HIST_LOOP
 
 
@@ -157,7 +175,7 @@ DONE	HALT			; done
 ;   R6: bitCounter
 ;   R0: tmp
 PRINT_NUMBER
-    ST R0, R0_SAVE
+    ST R0, R0_SAVE		; Save R0~R7 to memory
     ST R1, R1_SAVE
     ST R2, R2_SAVE
     ST R3, R3_SAVE
@@ -167,26 +185,26 @@ PRINT_NUMBER
     ST R7, R7_SAVE
 
 
-    LD  R4, ZERO
-    ADD R4, R4, #4
+    LD  R4, ZERO		; Clear digitCounter
+    ADD R4, R4, #4		; Set digitCounter
 
 DIGIT_LOOP
     AND R4, R4, R4
     BRnz PRINT_NUMBER_END
 
 
-    LD  R5, ZERO
-    LD  R6, ZERO
-    ADD R6, R6, #4
+    LD  R5, ZERO		; Clear digit
+    LD  R6, ZERO		; Clear bitCounter
+    ADD R6, R6, #4		; Set bitCounter
 
 BIT_LOOP
     AND R6, R6, R6
-    BRnz DISPLAY_DIGIT
+    BRnz DISPLAY_DIGIT	; Display digit if all bit in digit is read
 
 
-    ADD R5, R5, R5
+    ADD R5, R5, R5		; Left shift digit
 
-    AND R3, R3, R3
+    AND R3, R3, R3		; Check R3 MSB = 1 or 0
     BRn NUM_MSB_1
     BRnzp NUM_MSB_0
 
@@ -200,10 +218,10 @@ NUM_MSB_0
 
 NUM_MSB_END
 
-    ADD R3, R3, R3
+    ADD R3, R3, R3		; Left shift input
 
 
-    ADD R6, R6, #-1
+    ADD R6, R6, #-1		; Decrease bitCounter by one
     BRnzp BIT_LOOP
 
 
@@ -213,35 +231,35 @@ DISPLAY_DIGIT
     LD R0, ZERO
     ADD R0, R0, R5
 
-    ADD R0, R0, #-9
+    ADD R0, R0, #-9		; Check if display digit > 9 or not
     BRnz DIGIT_LE_9
     BRnzp DIGIT_GT_9
 
 DIGIT_LE_9
-    LD R0, ASCII_ZERO
+    LD R0, ASCII_ZERO	; Output 0~9 if digit <= 9
     ADD R5, R5, R0
 
     BRnzp DIGIT_END
 
 DIGIT_GT_9
-    ADD R5, R5, #-10
+    ADD R5, R5, #-10	; Output A~F if digit > 9
 
     LD R0, ASCII_A_CAP
     ADD R5, R5, R0
 
     BRnzp DIGIT_END
 
-DIGIT_END
+DIGIT_END				; Output digit to console
     LD R0, ZERO
     ADD R0, R0, R5
     OUT	
 
 
-    ADD R4, R4, #-1
+    ADD R4, R4, #-1		; Decrease digitCounter by one
     BRnzp DIGIT_LOOP
 
 PRINT_NUMBER_END
-    LD R0, R0_SAVE
+    LD R0, R0_SAVE		; Load R0~R7 from memory
     LD R1, R1_SAVE
     LD R2, R2_SAVE
     LD R3, R3_SAVE
