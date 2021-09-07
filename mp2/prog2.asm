@@ -616,7 +616,7 @@ POP_SaveR4	.BLKW #1	;
 STACK_SIZE
 ;OUT: R5
 	ST R3, SIZE_SaveR3	;save R3
-	ST R4, SIZE_SaveR4	;save R3
+	ST R4, SIZE_SaveR4	;save R4
 
     LD R3, STACK_START
     LD R4, STACk_TOP
