@@ -22,7 +22,7 @@ int main() {
     // Iterate each col element in the give row.
     for (int i = 0; i <= row; i++) {
         unsigned long long result = conbination(row, i);
-        printf("%d ", result);
+        printf("%llu ", result);
     }
 
     printf("\n");
