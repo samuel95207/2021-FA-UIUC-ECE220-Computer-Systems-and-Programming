@@ -4,6 +4,14 @@
 .ORIG x3000
 	
 ;your code goes here
+
+; Intro Paragraph:
+; partners: swhuang3, ycc6, dhhuang3
+; Call evaluate everytime after getc, 
+; and use stack inside evaluate subroutine to evaluate postfix expressions 
+; partners: swhuang3, ycc6, dhhuang3
+
+ 
 MAIN_LOOP	
     GETC
 
