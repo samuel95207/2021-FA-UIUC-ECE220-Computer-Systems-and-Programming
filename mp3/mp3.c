@@ -36,10 +36,13 @@ input: int n, int k
 output: unsigned long long C(n, k)
 */
 unsigned long long conbination(int n, int k) {
+    if(k * 2 > n){
+        k = n - k;
+    }
     unsigned long long result = 1;
-    for (int i = k; i >= 1; i--) {
+    for (int i = 1; i <= k; i++) {
         result *= (n + 1 - i);
-        result /= (k - i + 1);
+        result /= i;
     }
     return result;
 }
