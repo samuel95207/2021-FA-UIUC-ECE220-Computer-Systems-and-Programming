@@ -2,6 +2,12 @@
 #include <stdio.h>
 #include "semiprime.h"
 
+/*
+  Intro Paragraph:
+  partners: swhuang3, ycc6, dhhuang3
+  Fix all bug.
+  partners: swhuang3, ycc6, dhhuang3
+*/
 
 /*
     Main function: checks for valid inputs and runs the print_semiprimes function.
