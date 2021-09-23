@@ -21,7 +21,7 @@ int main() {
 
     // Iterate each col element in the give row.
     for (int i = 0; i <= row; i++) {
-        unsigned long long result = conbination(row, i);
+        unsigned long long result = conbination(row, i);    // Calculate C(row, i)
         printf("%llu ", result);
     }
 
@@ -36,11 +36,13 @@ input: int n, int k
 output: unsigned long long C(n, k)
 */
 unsigned long long conbination(int n, int k) {
+    // c(n,k) = c(n,n-k), use it to reduce calculation complexity
     if(k * 2 > n){
         k = n - k;
     }
     unsigned long long result = 1;
     for (int i = 1; i <= k; i++) {
+        // split '*' and '/' calculation to prevent persision error cause by integer division
         result *= (n + 1 - i);
         result /= i;
     }
