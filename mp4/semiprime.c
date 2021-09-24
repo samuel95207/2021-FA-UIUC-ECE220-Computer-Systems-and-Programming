@@ -11,6 +11,7 @@ int is_prime(int number)
 {
     int i;
     if (number == 1) {return 0;}
+    else if(number == 2) {return 1;}
     for (i = 2; i < number; i++) { //for each number smaller than it
         if (number % i == 0) { //check if the remainder is 0
             return 0;
