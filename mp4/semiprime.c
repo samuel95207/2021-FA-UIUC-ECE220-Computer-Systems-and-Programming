@@ -3,6 +3,16 @@
 
 
 /*
+  Intro Paragraph:
+  partners: swhuang3, ycc6, dhhuang3
+  Fix: Reverse return bug in is_prime()
+  Fix: 2 is not prime bug in is_prime()
+  Fix: Replace "k = i % j;" => "k = i / j;" in  print_semiprimes()
+  Fix: Add "ret = 1; break;" in  print_semiprimes()
+  partners: swhuang3, ycc6, dhhuang3
+*/
+
+/*
  * is_prime: determines whether the provided number is prime or not
  * Input    : a number
  * Return   : 0 if the number is not prime, else 1
