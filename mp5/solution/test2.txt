@@ -1,0 +1,20 @@
+*****Testing make_guess output:
+make_guess: invalid guess
+*****make_guess return value: PASS
+With guess 1, you got 2 perfect matches and 1 misplaced matches.
+Your score is 2100 and current max score is 2100.
+*****make_guess test1-1: PASS
+With guess 2, you got 4 perfect matches and 0 misplaced matches.
+Your score is 4000 and current max score is 4000.
+*****make_guess test1-2: PASS
+make_guess: invalid guess
+*****make_guess test2-1: PASS
+With guess 1, you got 0 perfect matches and 4 misplaced matches.
+Your score is 400 and current max score is 400.
+*****make_guess test2-2: PASS
+With guess 2, you got 2 perfect matches and 0 misplaced matches.
+Your score is 2000 and current max score is 2000.
+*****make_guess test3-1: PASS
+With guess 3, you got 4 perfect matches and 0 misplaced matches.
+Your score is 4000 and current max score is 4000.
+*****make_guess test3-2: PASS

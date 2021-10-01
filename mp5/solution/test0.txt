@@ -1,0 +1,4 @@
+*****Testing set_seed:
+set_seed: invalid seed
+*****set_seed return value: PASS
+*****set_seed call srand: PASS
