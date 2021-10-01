@@ -154,7 +154,9 @@ int make_guess(const char guess_str[]) {
 
     // Parse guess_str to guess[]
     if (sscanf(guess_str, "%s%s%s%s%1s", guess[0], guess[1], guess[2], guess[3],
-               post) != 1) {
+               post) != 4) {
+        printf("make_guess: invalid guess\n");
+        return 0;
     }
 
     int perfectMatchCount = 0;
