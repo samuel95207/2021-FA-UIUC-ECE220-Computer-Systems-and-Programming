@@ -10,6 +10,13 @@
  * in this file to help you get started.
  */
 
+/*
+  Intro Paragraph:
+  partners: swhuang3, ycc6, dhhuang3
+  Finish all functions
+  partners: swhuang3, ycc6, dhhuang3
+*/
+
 #include "prog5.h"
 
 #include <stdio.h>
@@ -113,10 +120,12 @@ int set_seed(const char seed_str[]) {
 void start_game() {
     // your code here
     for (int i = 0; i < 4; i++) {
+        // Create random solution
         int poolIndex = rand() % 8;
         strcpy(solutions[i], pool[poolIndex]);
     }
 
+    // Initialize scores
     max_score = -1;
     guess_number = 1;
 }
@@ -141,8 +150,9 @@ void start_game() {
 int make_guess(const char guess_str[]) {
     // your code here
     char guess[4][STR_MAX_LEN];
-
     char post[2];
+
+    // Parse guess_str to guess[]
     if (sscanf(guess_str, "%s%s%s%s%1s", guess[0], guess[1], guess[2], guess[3],
                post) != 1) {
     }
@@ -150,6 +160,7 @@ int make_guess(const char guess_str[]) {
     int perfectMatchCount = 0;
     int misplacedMatchCount = 0;
 
+    // Find perfectMatch
     for (int i = 0; i < 4; i++) {
         if (!is_valid(guess[i])) {
             printf("make_guess: invalid guess\n");
@@ -158,15 +169,21 @@ int make_guess(const char guess_str[]) {
 
         if (strcmp(guess[i], solutions[i]) == 0) {
             perfectMatchCount++;
+
+            // Set finded perfect match to ""
             strcpy(guess[i], "");
         }
     }
 
+    // Find misplacedMatch
     for (int i = 0; i < 4; i++) {
+        // Continue if i is already in perfect match
         if (strcmp(guess[i], "") == 0) {
             continue;
         }
+
         for (int j = 0; j < 4; j++) {
+            // Continue if j is already in perfect match
             if (i == j || strcmp(guess[j], "") == 0) {
                 continue;
             }
@@ -177,9 +194,11 @@ int make_guess(const char guess_str[]) {
         }
     }
 
+    // Calculate scores
     int score = perfectMatchCount * 1000 + misplacedMatchCount * 100;
     max_score = score > max_score ? score : max_score;
 
+    // Print result
     printf(
         "With guess %d, you got %d perfect matches and %d misplaced "
         "matches.\nYour score is %d and current max score is %d.\n",
