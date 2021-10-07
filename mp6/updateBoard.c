@@ -11,7 +11,6 @@
  * return the number of alive neighbors. There are at most eight neighbors.
  * Pay attention for the edge and corner cells, they have less neighbors.
  */
-#include <stdlib.h>
 #define board_2d(i, j) board[i * boardColSize + j]
 #define old_board_2d(i, j) old_board[i * boardColSize + j]
 
@@ -39,7 +38,8 @@ int countLiveNeighbor(int* board, int boardRowSize, int boardColSize, int row, i
  * Output: board is updated with new values for next step.
  */
 void updateBoard(int* board, int boardRowSize, int boardColSize) {
-    int* old_board = (int*)malloc(sizeof(int) * boardRowSize * boardColSize);
+    int old_board[boardRowSize * boardColSize];
+
     for (int i = 0; i < boardRowSize * boardColSize; i++) {
         old_board[i] = board[i];
     }
@@ -58,8 +58,6 @@ void updateBoard(int* board, int boardRowSize, int boardColSize) {
             }
         }
     }
-
-    free(old_board);
 }
 
 /*
