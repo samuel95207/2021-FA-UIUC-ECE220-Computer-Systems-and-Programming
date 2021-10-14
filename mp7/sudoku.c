@@ -9,7 +9,7 @@
 // Function: is_val_in_row
 // Return true if "val" already existed in ith row of array sudoku.
 
-struct pair{
+struct pair {
     int first;
     int second;
 };
@@ -86,7 +86,7 @@ int is_sudoku_complete(const int sudoku[9][9]) {
     return 1;
 }
 
-struct pair find_enpty_cell(const int sudoku[9][9]){
+struct pair find_enpty_cell(const int sudoku[9][9]) {
     struct pair ij;
     ij.first = -1;
     ij.second = -1;
@@ -107,12 +107,12 @@ struct pair find_enpty_cell(const int sudoku[9][9]){
 int solve_sudoku(int sudoku[9][9]) {
     // BEG TODO.
     int i, j;
-    if (is_sudoku_complete(sudoku)) {
+
+    struct pair ij = find_enpty_cell(sudoku);
+    i = ij.first;
+    j = ij.second;
+    if (i < 0 || j < 0) {
         return 1;
-    } else {
-        struct pair ij = find_enpty_cell(sudoku);
-        i = ij.first;
-        j = ij.second;
     }
 
     for (int num = 1; num <= 9; num++) {

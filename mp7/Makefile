@@ -5,7 +5,7 @@ mp7: main.c sudoku.c
 	g++ -g main.obj sudoku.obj sudoku_golden.a -o mp7.out -no-pie
 
 clean:
-	rm *.o mp7.out
+	rm *.obj mp7.out
 
 sudoku1: mp7
 	./mp7.out sudoku1.txt
