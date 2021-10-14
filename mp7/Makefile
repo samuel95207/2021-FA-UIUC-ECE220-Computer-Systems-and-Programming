@@ -1,8 +1,8 @@
 
 mp7: main.c sudoku.c
-	g++ -g -c sudoku.c -o sudoku.o
-	g++ -g -c main.c -o main.o
-	g++ -g main.o sudoku.o sudoku_golden.a -o mp7.out
+	g++ -g -c sudoku.c -o sudoku.obj -no-pie
+	g++ -g -c main.c -o main.obj -no-pie
+	g++ -g main.obj sudoku.obj sudoku_golden.a -o mp7.out -no-pie
 
 clean:
 	rm *.o mp7.out
