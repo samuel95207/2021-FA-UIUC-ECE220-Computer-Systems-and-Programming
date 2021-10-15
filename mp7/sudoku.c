@@ -1,3 +1,11 @@
+/*
+  Intro Paragraph:
+  partners: swhuang3, ycc6, dhhuang3
+    Finish all functions.
+  partners: swhuang3, ycc6, dhhuang3
+*/
+
+
 #include "sudoku.h"
 
 //-------------------------------------------------------------------------------------------------
