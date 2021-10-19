@@ -1,7 +1,9 @@
 /*
   Intro Paragraph:
   partners: swhuang3, ycc6, dhhuang3
-    Finish all functions.
+    Use a struct pair to encapsulate (i, j) cell.
+    Use for to iterate board to check is_val_in_row, is_val_in_col, is_val_in_3x3_zone
+    Use recurrsion to solve sudoku
   partners: swhuang3, ycc6, dhhuang3
 */
 
