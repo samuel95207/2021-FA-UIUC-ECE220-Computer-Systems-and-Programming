@@ -1,6 +1,14 @@
 #include "game.h"
 
 
+/*
+  Intro Paragraph:
+  partners: swhuang3, ycc6, dhhuang3
+  Finish all functions
+  partners: swhuang3, ycc6, dhhuang3
+*/
+
+
 game* make_game(int rows, int cols)
 /*! Create an instance of a game structure with the given number of rows
     and columns, initializing elements to -1 and return a pointer
