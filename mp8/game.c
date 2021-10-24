@@ -14,7 +14,14 @@ game* make_game(int rows, int cols)
     mygame->cells = malloc(rows * cols * sizeof(cell));
 
     // YOUR CODE STARTS HERE:  Initialize all other variables in game struct
+    mygame->rows = rows;
+    mygame->cols = cols;
+    mygame->score = 0;
 
+    unsigned int cellSize = rows * cols;
+    for (int i = 0; i < cellSize; i++) {
+        mygame->cells[i] = -1;
+    }
 
     return mygame;
 }
@@ -32,6 +39,14 @@ void remake_game(game** _cur_game_ptr, int new_rows, int new_cols)
     (*_cur_game_ptr)->cells = malloc(new_rows * new_cols * sizeof(cell));
 
     // YOUR CODE STARTS HERE:  Re-initialize all other variables in game struct
+    (*_cur_game_ptr)->rows = new_rows;
+    (*_cur_game_ptr)->cols = new_cols;
+    (*_cur_game_ptr)->score = 0;
+
+    unsigned int cellSize = new_rows * new_cols;
+    for (int i = 0; i < cellSize; i++) {
+        (*_cur_game_ptr)->cells[i] = -1;
+    }
 
     return;
 }
@@ -54,8 +69,10 @@ cell* get_cell(game* cur_game, int row, int col)
 */
 {
     // YOUR CODE STARTS HERE
-
-    return NULL;
+    if (row > cur_game->rows || row < 0 || col > cur_game->cols || col < 0) {
+        return NULL;
+    }
+    return &cur_game->cells[row * cur_game->cols + col];
 }
 
 int move_w(game* cur_game)
@@ -67,28 +84,140 @@ int move_w(game* cur_game)
 */
 {
     // YOUR CODE STARTS HERE
+    int moveFlag = 0;
+    for (int y = 1; y < cur_game->rows; y++) {
+        for (int x = 0; x < cur_game->cols; x++) {
+            int* cell = get_cell(cur_game, y, x);
+            int cellValue = *cell;
 
-    return 1;
+            if (cellValue == -1) {
+                continue;
+            }
+            for (int yFind = y - 1; yFind >= 0; yFind--) {
+                int* findCell = get_cell(cur_game, yFind, x);
+                int* prevCell = get_cell(cur_game, yFind + 1, x);
+                int findCellValue = *findCell;
+                if (findCellValue == -1) {
+                    *findCell = cellValue;
+                    *prevCell = -1;
+                    moveFlag = 1;
+                } else if (findCellValue == cellValue) {
+                    *findCell = cellValue + findCellValue;
+                    *prevCell = -1;
+                    moveFlag = 1;
+                    break;
+                } else {
+                    break;
+                }
+            }
+        }
+    }
+
+    return moveFlag;
 };
 
 int move_s(game* cur_game)  // slide down
 {
     // YOUR CODE STARTS HERE
+    int moveFlag = 0;
+    for (int y = cur_game->rows - 2; y >= 0; y--) {
+        for (int x = 0; x < cur_game->cols; x++) {
+            int* cell = get_cell(cur_game, y, x);
+            int cellValue = *cell;
 
-    return 1;
+            if (cellValue == -1) {
+                continue;
+            }
+            for (int yFind = y + 1; yFind < cur_game->rows; yFind++) {
+                int* findCell = get_cell(cur_game, yFind, x);
+                int* prevCell = get_cell(cur_game, yFind - 1, x);
+                int findCellValue = *findCell;
+                if (findCellValue == -1) {
+                    *findCell = cellValue;
+                    *prevCell = -1;
+                    moveFlag = 1;
+                } else if (findCellValue == cellValue) {
+                    *findCell = cellValue + findCellValue;
+                    *prevCell = -1;
+                    moveFlag = 1;
+                    break;
+                } else {
+                    break;
+                }
+            }
+        }
+    }
+
+    return moveFlag;
 };
 
 int move_a(game* cur_game)  // slide left
 {
     // YOUR CODE STARTS HERE
+    int moveFlag = 0;
+    for (int x = 1; x < cur_game->cols; x++) {
+        for (int y = 0; y < cur_game->rows; y++) {
+            int* cell = get_cell(cur_game, y, x);
+            int cellValue = *cell;
 
-    return 1;
+            if (cellValue == -1) {
+                continue;
+            }
+            for (int xFind = x - 1; xFind >= 0; xFind--) {
+                int* findCell = get_cell(cur_game, y, xFind);
+                int* prevCell = get_cell(cur_game, y, xFind + 1);
+                int findCellValue = *findCell;
+                if (findCellValue == -1) {
+                    *findCell = cellValue;
+                    *prevCell = -1;
+                    moveFlag = 1;
+                } else if (findCellValue == cellValue) {
+                    *findCell = cellValue + findCellValue;
+                    *prevCell = -1;
+                    moveFlag = 1;
+                    break;
+                } else {
+                    break;
+                }
+            }
+        }
+    }
+
+    return moveFlag;
 };
 
 int move_d(game* cur_game) {  // slide to the right
     // YOUR CODE STARTS HERE
+    int moveFlag = 0;
+    for (int x = cur_game->cols - 2; x >= 0; x--) {
+        for (int y = 0; y < cur_game->rows; y++) {
+            int* cell = get_cell(cur_game, y, x);
+            int cellValue = *cell;
 
-    return 1;
+            if (cellValue == -1) {
+                continue;
+            }
+            for (int xFind = x + 1; xFind < cur_game->cols; xFind++) {
+                int* findCell = get_cell(cur_game, y, xFind);
+                int* prevCell = get_cell(cur_game, y, xFind - 1);
+                int findCellValue = *findCell;
+                if (findCellValue == -1) {
+                    *findCell = cellValue;
+                    *prevCell = -1;
+                    moveFlag = 1;
+                } else if (findCellValue == cellValue) {
+                    *findCell = cellValue + findCellValue;
+                    *prevCell = -1;
+                    moveFlag = 1;
+                    break;
+                } else {
+                    break;
+                }
+            }
+        }
+    }
+
+    return moveFlag;
 };
 
 int legal_move_check(game* cur_game)
@@ -98,8 +227,31 @@ int legal_move_check(game* cur_game)
  */
 {
     // YOUR CODE STARTS HERE
+    for (int y = 0; y < cur_game->rows; y++) {
+        for (int x = 0; x < cur_game->cols; x++) {
+            int* cell = get_cell(cur_game, y, x);
+            int cellValue = *cell;
+            if (cellValue == -1) {
+                return 1;
+            }
 
-    return 1;
+            int* neighborCells[4] = { get_cell(cur_game, y - 1, x),
+                                      get_cell(cur_game, y + 1, x),
+                                      get_cell(cur_game, y, x - 1),
+                                      get_cell(cur_game, y, x + 1) };
+
+            for (int i = 0; i < 4; i++) {
+                if(neighborCells[i] == NULL){
+                    continue;
+                }
+                if(*neighborCells[i] == cellValue){
+                    return 1;
+                }
+            }
+        }
+    }
+
+    return 0;
 }
 
 
