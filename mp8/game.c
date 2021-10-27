@@ -77,7 +77,7 @@ cell* get_cell(game* cur_game, int row, int col)
 */
 {
     // YOUR CODE STARTS HERE
-    if (row > cur_game->rows || row < 0 || col > cur_game->cols || col < 0) {
+    if (row >= cur_game->rows || row < 0 || col >= cur_game->cols || col < 0) {
         return NULL;
     }
     return &cur_game->cells[row * cur_game->cols + col];
