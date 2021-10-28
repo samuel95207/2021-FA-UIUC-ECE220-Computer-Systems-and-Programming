@@ -3,6 +3,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
+  Intro Paragraph:
+  partners: swhuang3, ycc6, dhhuang3
+  Finish all functions
+  partners: swhuang3, ycc6, dhhuang3
+*/
+
 int inBound(maze_t *maze, int row, int col) {
     return col >= 0 && col < maze->width && row >= 0 && row < maze->height;
 }
