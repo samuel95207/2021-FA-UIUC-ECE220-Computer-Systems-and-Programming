@@ -15,4 +15,4 @@ clean:
 
 
 case%:
-	@./mp9.out ./tests/maze$(patsubst case%,%,$@).txt
+	@valgrind ./mp9.out ./tests/maze$(patsubst case%,%,$@).txt
