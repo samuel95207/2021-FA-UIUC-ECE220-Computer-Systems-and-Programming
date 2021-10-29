@@ -122,7 +122,7 @@ int solveMazeDFS(maze_t *maze, int col, int row) {
             continue;
         }
         char cellValue = maze->cells[pos.first][pos.second];
-        printf("%d %d %d %c\n",i, pos.first, pos.second, cellValue);
+        // printf("%d %d %d %c\n",i, pos.first, pos.second, cellValue);
         if (cellValue == END) {
             maze->cells[row][col] = PATH;
             return 1;
@@ -132,11 +132,11 @@ int solveMazeDFS(maze_t *maze, int col, int row) {
             if (solveMazeDFS(maze, pos.second, pos.first)) {
                 adjacentHasPath = 1;
             }
-            printf("find adjacent %d %d %d %c\n",i, pos.first, pos.second, cellValue);
+            // printf("find adjacent %d %d %d %c\n",i, pos.first, pos.second, cellValue);
         }
     }
 
-    printf("\n");
+    // printf("\n");
 
     if (!adjacentHasPath) {
         maze->cells[row][col] = VISITED;
