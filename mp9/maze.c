@@ -125,6 +125,9 @@ int solveMazeDFS(maze_t *maze, int col, int row) {
         // printf("%d %d %d %c\n",i, pos.first, pos.second, cellValue);
         if (cellValue == END) {
             maze->cells[row][col] = PATH;
+            if (row == maze->startRow && col == maze->startColumn) {
+                maze->cells[row][col] = START;
+            }
             return 1;
         }
         if (cellValue == EMPTY) {
@@ -142,7 +145,7 @@ int solveMazeDFS(maze_t *maze, int col, int row) {
         maze->cells[row][col] = VISITED;
     }
 
-    if(row==maze->startRow && col==maze->startColumn){
+    if (row == maze->startRow && col == maze->startColumn) {
         maze->cells[row][col] = START;
     }
 
