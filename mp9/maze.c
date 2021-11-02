@@ -34,10 +34,12 @@ maze_t *createMaze(char *fileName) {
     fscanf(infile, "%d %d\n", &maze->width, &maze->height);
 
     maze->cells = malloc(maze->height * sizeof(char *));
-
-    for (int y = 0; y < maze->height; y++) {
+    
+    int y;
+    for (y = 0; y < maze->height; y++) {
         maze->cells[y] = malloc(maze->width * sizeof(char));
-        for (int x = 0; x < maze->width; x++) {
+        int x;
+        for (x = 0; x < maze->width; x++) {
             char input = fgetc(infile);
             if (input == START) {
                 maze->startRow = y;
@@ -65,7 +67,8 @@ maze_t *createMaze(char *fileName) {
  */
 void destroyMaze(maze_t *maze) {
     // Your code here.
-    for (int y = 0; y < maze->height; y++) {
+    int y;
+    for (y = 0; y < maze->height; y++) {
         free(maze->cells[y]);
     }
     free(maze->cells);
@@ -83,8 +86,10 @@ void destroyMaze(maze_t *maze) {
  */
 void printMaze(maze_t *maze) {
     // Your code here.
-    for (int y = 0; y < maze->height; y++) {
-        for (int x = 0; x < maze->width; x++) {
+    int y;
+    for (y = 0; y < maze->height; y++) {
+        int x;
+        for (x = 0; x < maze->width; x++) {
             printf("%c", maze->cells[y][x]);
         }
         printf("\n");
@@ -116,7 +121,8 @@ int solveMazeDFS(maze_t *maze, int col, int row) {
     pair adjacentCellPos[4] = {up, down, left, right};
     int adjacentHasPath = 0;
 
-    for (int i = 0; i < 4; i++) {
+    int i;
+    for (i = 0; i < 4; i++) {
         pair pos = adjacentCellPos[i];
         if (!inBound(maze, pos.first, pos.second)) {
             continue;
