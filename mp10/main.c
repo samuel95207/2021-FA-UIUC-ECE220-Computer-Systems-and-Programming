@@ -56,6 +56,7 @@ TEST_1:printf("calling load_tuples on \"matrices/input_mats/scrambled_rows.txt\"
     
     /* Test for mult_tuples
      * uncomment and test if needed
+     */
      sp_tuples * m_At = load_tuples("matrices/input_mats/m_A.txt");
      sp_tuples * m_Bt = load_tuples("matrices/input_mats/m_B.txt");
      printf("m_Ct = m_A*m_B multiplication in tuples:\n");
@@ -67,7 +68,6 @@ TEST_1:printf("calling load_tuples on \"matrices/input_mats/scrambled_rows.txt\"
      printf("sm_Ct = sm_A*sm_B sparse multiplication in tuples:\n");
      sp_tuples * sm_Ct = mult_tuples(sm_At,sm_Bt);
      printt(sm_Ct);
-     */
     
     //very large sparese matrices addition
     sp_tuples * sla_A = load_tuples("matrices/input_mats/sla_A.txt");
@@ -79,12 +79,13 @@ TEST_1:printf("calling load_tuples on \"matrices/input_mats/scrambled_rows.txt\"
     
     /* uncomment and test if needed
      * very large sparese matrices multiplication
+     */
      sp_tuples * sml_A = load_tuples("matrices/input_mats/sml_A.txt");
      sp_tuples * sml_B = load_tuples("matrices/input_mats/sml_B.txt");
      printf("sml_C = sml_A*sml_B sparse multiplication in tuples:\n");
      sp_tuples * sml_C = mult_tuples(sml_A,sml_B);
      printt(sml_C);
-     */
+
     
     printf("Saving output matrices... \n");
     
@@ -97,10 +98,11 @@ TEST_1:printf("calling load_tuples on \"matrices/input_mats/scrambled_rows.txt\"
     
     /* Uncomment if testing mult_tuples
      *
+     */
      save_tuples("matrices/output_mats/m_Ct.txt",m_Ct);
      save_tuples("matrices/output_mats/sm_Ct.txt",sm_Ct);
      save_tuples("matrices/output_mats/sml_C.txt",sml_C);
-     */
+     
     
     printf("freeing matrices from memory..\n");
     destroy_tuples(withZeroest);
@@ -121,6 +123,7 @@ TEST_1:printf("calling load_tuples on \"matrices/input_mats/scrambled_rows.txt\"
     
     /* Uncomment if testing mult_tuples
      *
+     */
      destroy_tuples(m_At);
      destroy_tuples(sm_At);
      destroy_tuples(sml_A);
@@ -132,7 +135,7 @@ TEST_1:printf("calling load_tuples on \"matrices/input_mats/scrambled_rows.txt\"
      destroy_tuples(m_Ct);
      destroy_tuples(sm_Ct);
      destroy_tuples(sml_C);
-     */
+     
     
     return 0;
 }

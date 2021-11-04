@@ -41,4 +41,5 @@ sp_tuples * mult_tuples(sp_tuples * matA, sp_tuples * matB);
 //free any and all allocated space associated with the given matrix.
 void destroy_tuples(sp_tuples * mat_t);
 
-
+void printMat(sp_tuples* sp);
+void printList(sp_tuples* sp);
