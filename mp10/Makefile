@@ -20,7 +20,7 @@ test: test.obj sparsemat.obj
 
 verify:
 	@./mp10.out > matrices/output_mats/mp10_output.txt
-	@cmp --silent matrices/output_mats/mp10_output.txt matrices/output_mats/gold/mp10_output.txt && echo '### SUCCESS: Pass verification! ###' || echo '### ERROR: Failed verification! ###'
+	@for f in $(shell ls matrices/output_mats/);do cmp --silent matrices/output_mats/$${f} matrices/gold/$${f} && echo -n '### SUCCESS: Pass verification! ###  ' || echo -n '### ERROR: Failed verification! ###  '; echo $${f}; done
 
 clean:
 	rm -f sparsemat.obj main.obj mp10.out test.out
