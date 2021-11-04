@@ -3,6 +3,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
+  Intro Paragraph:
+  partners: swhuang3, ycc6, dhhuang3
+  Finish all functions
+  partners: swhuang3, ycc6, dhhuang3
+*/
 
 
 int tupleCompare(sp_tuples_node* n1, sp_tuples_node* n2) {
