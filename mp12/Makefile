@@ -1,12 +1,12 @@
 student: shape.cpp main.cpp
-	g++ main.cpp shape.cpp -o mp12
+	g++ main.cpp shape.cpp -o mp12.out
 
 verify:  shape.cpp verify.cpp
-	g++ -g -c shape.cpp -o shape.o
-	g++ -g -c verify.cpp -o verify.o
-	g++ -g verify.o shape.o check.a -o verify_mp12
+	g++ -g -no-pie -c shape.cpp -o shape.obj
+	g++ -g -no-pie -c verify.cpp -o verify.obj
+	g++ -g -no-pie verify.obj shape.obj check.a -o verify_mp12.out
 
 clean:
-	rm  *.o mp12 
+	rm  *.obj mp12.out verify_mp12.out
 
 
