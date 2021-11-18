@@ -1,6 +1,8 @@
 #include "shape.hpp"
 
+#if __GNUC__ <= 4
 #pragma GCC diagnostic warning "-std=c++11"
+#endif
 
 // Base class
 // Please implement Shape's member functions
