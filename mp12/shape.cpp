@@ -1,6 +1,6 @@
 #include "shape.hpp"
 
-
+#pragma GCC diagnostic warning "-std=c++11"
 
 // Base class
 // Please implement Shape's member functions
@@ -27,11 +27,11 @@ double Rectangle::getArea() const { return length_ * width_; }
 double Rectangle::getVolume() const { return 0; }
 
 Rectangle Rectangle::operator+(const Rectangle &R) {
-    return Rectangle(length_ + R.length_, width_ + R.width_);
+    return Rectangle(width_ + R.width_, length_ + R.length_);
 }
 
 Rectangle Rectangle::operator-(const Rectangle &R) {
-    return Rectangle(max(0.0, length_ - R.length_), max(0.0, width_ - R.width_));
+    return Rectangle(max(0.0, width_ - R.width_), max(0.0, length_ - R.length_));
 }
 
 
@@ -78,11 +78,11 @@ double RectPrism::getArea() const {
 double RectPrism::getVolume() const { return width_ * height_ * length_; }
 
 RectPrism RectPrism::operator+(const RectPrism &RP) {
-    return RectPrism(width_ + RP.width_, height_ + RP.height_, length_ + RP.length_);
+    return RectPrism(width_ + RP.width_, length_ + RP.length_, height_ + RP.height_);
 }
 RectPrism RectPrism::operator-(const RectPrism &RP) {
-    return RectPrism(max(0.0, width_ - RP.width_), max(0.0, height_ - RP.height_),
-                     max(0.0, length_ - RP.length_));
+    return RectPrism(max(0.0, width_ - RP.width_), max(0.0, length_ - RP.length_),
+                     max(0.0, height_ - RP.height_));
 }
 
 
